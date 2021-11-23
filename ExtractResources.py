@@ -1,9 +1,9 @@
 # This script allows to extract resources (images, musics, etc) from blaster.exe
 #
-# The needed archive header-like (containing filenames, sizes and offsets) can be read 
+# The needed archive-like header (containing filenames, sizes and offsets) can be read 
 # automatically by launching the game briefly and search it in memory
 #
-# This data can also be dumped manually in a file by using CheatEngine or a debugger 
+# This data can also be dumped manually in a file by using Cheat Engine or a debugger 
 # (RVA should be 0x21AC4 and size is 1060 bytes) and set it as the third command line argument
 # 
 # david4599 - 2021
