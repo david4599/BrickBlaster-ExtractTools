@@ -115,12 +115,12 @@ In the same way, press 'T' to enable the Test mode which activates the player bo
 ## Notes
 - Some resource formats can't be readable without any third party software. That's why the resource.zip file contains the original files but also the converted mod musics to mp3 and iff sounds to wav. The unpacked config files are also included.
 - The FLC format of blaster.flc and intro.flc is a video format without sound that can be read by VLC player.  
-  Sadly, blaster.flc seems to be not well decoded by the player but this ending part has been screen recorded to the files "Brick Blaster Ending.mp4" (with music) and "Brick Blaster Ending (Raw).mp4" (Original 450x180 without music) and available in the resources.zip file.
+  Sadly, blaster.flc seems to be not well decoded by the player but this ending part has been screen recorded to the files "Brick Blaster Ending.mp4" (with music) and "Brick Blaster Ending (Raw).mp4" (Original 450x180 resolution without music) and available in the resources.zip file.
 - IFF sound files can be read and exported with the music tracker software [Fasttracker II clone](https://16-bits.org/ft2.php)
 - Original game musics were made in the [MOD format](https://en.wikipedia.org/wiki/Module_file). They can be read with the music tracker software [OpenMPT](https://openmpt.org/).  
   Some audio effects were applied directly in game meaning that the musics are a little bit different when they are played with default's OpenMPT settings.  
   To have the (almost) exact same sound, go to View tab -> Setup -> Mixer tab and set the "Resampling Filter" option to "No interpolation". Also, set the "Stereo Separation" to 200%. Then restart OpenMPT.
-- The files packed with Diet can be replaced by the unpacked ones without breaking something. The game can handle them, the unpack function is just ignored like the other files not packed originally.
+- The files packed with Diet can be replaced by the unpacked ones without breaking anything. The game can handle them, the unpack function is just ignored like the other files not packed originally.
 - The game was launched in 1999 and can't be found easily without having the original CD-ROM. I assume it can be considered as an abandonware today and can be distributed freely so I share it here though an [ISO file](https://www.dropbox.com/s/91b3xgbr1c1e86v/Brick%20Blaster.iso?dl=1).
 
 #
