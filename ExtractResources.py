@@ -6,7 +6,7 @@
 # This data can also be dumped manually in a file by using CheatEngine or a debugger 
 # (RVA should be 0x21AC4 and size is 1060 bytes) and set it as the third command line argument
 # 
-# david4599 -2021
+# david4599 - 2021
 
 import sys
 import os

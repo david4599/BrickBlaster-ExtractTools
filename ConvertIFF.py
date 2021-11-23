@@ -2,7 +2,7 @@
 #
 # It uses SoX (https://sourceforge.net/projects/sox/) to convert them
 # 
-# david4599 -2021
+# david4599 - 2021
 
 import sys
 import os

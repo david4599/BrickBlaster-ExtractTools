@@ -3,7 +3,7 @@
 # It uses a program called undiet.exe that can be compiled from the sources in the ".\undiet\src" folder
 # The compiled undiet.exe must be located in the ".\undiet\bin" folder
 # 
-# david4599 -2021
+# david4599 - 2021
 
 import sys
 import os
