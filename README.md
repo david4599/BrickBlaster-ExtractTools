@@ -3,7 +3,7 @@
 <img src="img/BrickBlasterExtractTools_logo.png" alt="Brick Blaster Extract Tools Logo">
 
 ## Description
-This repository contains some Python scripts to extract the resources (images, musics, etc) of the game Brick Blaster (Media Pocket French Version).
+This repository contains some Python scripts to extract the resources (images, musics, etc) of the game Brick Blaster (Media Pocket 1999 French and Spanish Versions).
 
 This follows the research I did about crashes happening on Windows 7+ and patches I released in the repo [Brick Blaster Patch](https://github.com/david4599/BrickBlaster-Patch). Hidden features and easter eggs I also discovered will be listed here at the end.
 
