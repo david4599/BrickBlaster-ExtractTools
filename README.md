@@ -14,16 +14,16 @@ All the extracted resources are already available in the [Releases](https://gith
 - Install pip packages `kaitaistruct` and `pypiwin32` (make sure to have up-to-date pip and setuptools):
 
   ```
-  python -m pip install --upgrade pip
-  python -m pip install setuptools --upgrade
+  python -m pip install pip setuptools --upgrade
   python -m pip install kaitaistruct pypiwin32
   ```
-- Build Undiet (Diet is an old and not used anymore packer for compressing and self-extracting executables and data) from sources located in `.\undiet\src`. The compiled exe must be placed in `.\undiet\bin`. The sources are compatible with Visual Studio 2019 and g++ (at least).
+- Build Undiet (Diet is an old and not used anymore packer for compressing and self-extracting executables and data) from sources located in `.\undiet\src` or download the already compiled version in the Releases section. The exe file must be placed in `.\undiet\bin`. The sources are compatible with Visual Studio 2019 and g++ (at least).
 - Install [SoX](https://sourceforge.net/projects/sox/) and add its install folder to your PATH environment variable.
 
 ## Usage
-First, use the script `ExtractResources.py` to extract the resources from blaster.exe. It will launch the game briefly and try to dump the archive-like header (containing filenames, sizes and offsets) from the memory to the file `blaster_res_header.bin`. The script will parse this binary file and get all the files from blaster.exe.  
-If the game can't be launched or the script can't dump the bin file, use [Cheat Engine](https://www.cheatengine.org) or a debugger to manually dump it (RVA should be 0x21AC4 and size is 1060 bytes) and set it as the third command line argument.
+First, use the script `ExtractResources.py` to extract the resources from blaster.exe. It will launch the game briefly and try to dump the archive-like header (containing filenames, sizes and offsets) from the memory to the file `blaster_res_header.bin` (bin file also included in the Releases). The script will parse this binary file and get the 50 files from blaster.exe (52 files are indexed but there are actually 2 duplicates).  
+If the game can't be launched or the script can't dump the bin file, use [Cheat Engine](https://www.cheatengine.org) or a debugger to manually dump it and set it as the third command line argument. The address in the process memory should be 0x421AC4 (base address 0x400000 + RVA 0x21AC4) and size is 1060 bytes.  
+In case the address has changed, search for the string "00_01.GIF". Some bytes before, there are the letters "EOS", the address at "E" is the beginning of the header (or simplier, directly search for these bytes to get the right address: 45 4F 53 00 34).
 
 Usage example:
 ```

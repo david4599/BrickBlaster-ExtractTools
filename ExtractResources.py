@@ -24,7 +24,7 @@ from resources import Resources
 
 k32 = c.WinDLL('kernel32', use_last_error=True)
 ReadProcessMemory = k32.ReadProcessMemory
-ReadProcessMemory.argtypes = [w.HANDLE,w.LPCVOID,w.LPVOID,c.c_size_t,c.POINTER(c.c_size_t)]
+ReadProcessMemory.argtypes = [w.HANDLE, w.LPCVOID, w.LPVOID, c.c_size_t, c.POINTER(c.c_size_t)]
 ReadProcessMemory.restype = w.BOOL
 
 
@@ -36,25 +36,36 @@ res_header_size = 0x424 # 1060 bytes
 
 def get_res_header(pid, rva, size):
     buffer = (c.c_byte * size)()
-    bytes_read = c.c_ulong(0)
+    bytes_read = c.c_size_t()
     
     module_handles = []
-    timeout_count = 10
+    timeout_count = 50
     for i in range(0, timeout_count):
         try:
             process_handle = wapi.OpenProcess(wcon.PROCESS_ALL_ACCESS, False, pid)
+        except:
+            if i == timeout_count - 1:
+                err = wapi.GetLastError()
+                print("Failed OpenProcess Call: " + str(err))
+                sys.exit(-6)
+                
+        try:
             module_handles = wproc.EnumProcessModules(process_handle)
+            
+            if len(module_handles) <= 0:
+                continue
+                
             break
         except:
-            if i == 9:
-                raise
-            else:
-                pass
+            if i == timeout_count - 1:
+                err = wapi.GetLastError()
+                print("Failed EnumProcessModules Call: " + str(err))
+                sys.exit(-7)
             
-        time.sleep(0.5)
+        time.sleep(0.2)
     
     if len(module_handles) <= 0:
-        print("Error: No module handle found, dump the resources header data manually from memory (e.g. by using CheatEngine or a debugger)..")
+        print("Error: No module handle found, dump the resources header data manually from memory (e.g. by using Cheat Engine or a debugger).")
         sys.exit(-1)
     
     base_address = module_handles[0]
@@ -63,9 +74,9 @@ def get_res_header(pid, rva, size):
     
     print("Trying to read resources header from memory (address: " + hex(address) + ")")
     magic_found = False
-    timeout_count = 10
+    timeout_count = 20
     for i in range(0, timeout_count):
-        res = ReadProcessMemory(int(process_handle), c.c_void_p(address), buffer, len(buffer), c.byref(bytes_read))
+        res = ReadProcessMemory(int(process_handle), c.c_void_p(address), c.byref(buffer), c.sizeof(buffer), c.byref(bytes_read))
         
         if bytearray(buffer[0:3]) == bytearray(magic_find):
             print("Resources header found!\n")
@@ -73,15 +84,15 @@ def get_res_header(pid, rva, size):
             break
         
         time.sleep(0.5)
-    
-    wapi.CloseHandle(process_handle)
-    
-    
+        
     if not res:
         err = wapi.GetLastError()
-        print("Failed Win32 API - Last Error: ", err)
-        print("Error: Something gone wrong, dump the resources header data manually from memory (e.g. by using CheatEngine or a debugger).")
+        print("Failed ReadProcessMemory Call: " + str(err))
+        print("Error: Something gone wrong, dump the resources header data manually from memory (e.g. by using Cheat Engine or a debugger).")
+        wapi.CloseHandle(process_handle)
         sys.exit(-2)
+    
+    wapi.CloseHandle(process_handle)
         
     if not magic_found:
         return None
@@ -110,7 +121,9 @@ def main(argv):
         
         proc = Popen([blaster_exe_path], cwd=os.path.dirname(os.path.abspath(blaster_exe_path)), stdin=None, stdout=None, stderr=None, shell=False)
         pid = proc.pid
-
+        
+        time.sleep(1)
+        
         buffer = get_res_header(pid, res_header_base_address, res_header_size)
         
         if not buffer:
