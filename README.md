@@ -23,7 +23,7 @@ All the extracted resources are already available in the [Releases](https://gith
 ## Usage
 First, use the script `ExtractResources.py` to extract the resources from blaster.exe. It will launch the game briefly and try to dump the archive-like header (containing filenames, sizes and offsets) from the memory to the file `blaster_res_header.bin` (bin file also included in the Releases). The script will parse this binary file and get the 50 files from blaster.exe (52 files are indexed but there are actually 2 duplicates).  
 If the game can't be launched or the script can't dump the bin file, use [Cheat Engine](https://www.cheatengine.org) or a debugger to manually dump it and set it as the third command line argument. The address in the process memory should be 0x421AC4 (base address 0x400000 + RVA 0x21AC4) and size is 1060 bytes.  
-In case the address has changed, search for the string "00_01.GIF". Some bytes before, there are the letters "EOS", the address at "E" is the beginning of the header (or simplier, directly search for these bytes to get the right address: 45 4F 53 00 34).
+In case the address has changed, search for the string "00_01.GIF". Some bytes before, there are the letters "EOS", the address at "E" is the beginning of the header (or simply search for these bytes to get the right address: 45 4F 53 00 34).
 
 Usage example:
 ```
